@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>آراء ومشاركات الطلاب - مستر محمود جلال</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Cairo', sans-serif;
+      background: #000;
+      color: #fff;
+      direction: rtl;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* صورة الخلفية تغطي الصفحة كاملة بشفافية */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('2.jpeg'); /* عدلي هنا اسم الصورة */
+      background-repeat: no-repeat;
+background-size: 50% auto;
+      background-position: center center;
+      background-size: cover; /* غطي كل الخلفية */
+      opacity: 0.20;  /* درجة الشفافية */
+      z-index: 0;
+      pointer-events: none;
+      filter: brightness(0.7);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 20px auto 50px;
+      background-color: rgba(20, 20, 20, 0);
+      border-radius: 20px;
+      padding: 30px 35px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0);
+      min-height: 520px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-weight: 800;
+      font-size: 2.2rem;
+      letter-spacing: 1.3px;
+      color: #e6e6e6;
+    }
+
+    .videos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 35px;
+    }
+
+    .videos iframe {
+      width: 260px;
+      height: 150px;
+      border-radius: 14px;
+      border: none;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease;
+    }
+    .videos iframe:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+
+    .review-box {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: none;
+      font-size: 1rem;
+      font-family: 'Cairo', sans-serif;
+      background-color: #222;
+      color: #eee;
+      box-shadow: inset 0 0 6px #000;
+      transition: box-shadow 0.3s ease;
+    }
+    textarea:focus {
+      outline: none;
+      box-shadow: inset 0 0 10px #ffd700;
+      background-color: #333;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 13px;
+      border-radius: 18px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #43a047;
+    }
+
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 18px;
+      direction: ltr;
+    }
+    .stars input[type="radio"] {
+      display: none;
+    }
+    .stars label {
+      font-size: 32px;
+      color: gray;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+    .stars input[type="radio"]:checked ~ label,
+    .stars label:hover,
+    .stars label:hover ~ label {
+      color: gold;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 28px;
+      background-color: #66b2ff;
+      padding: 11px 28px;
+      border-radius: 20px;
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .back-btn:hover {
+      background-color: #3399ff;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        margin: 15px 15px 40px;
+        padding: 25px 20px;
+      }
+      .videos iframe {
+        width: 100%;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>لحظاتكم وأصواتكم مع مستر محمود جلال</h1>
+
+    <div class="videos">
+      <!-- استبدلي الروابط بالفيديوهات الخاصة بك -->
+      <iframe src="فيد1.mp4" allowfullscreen></iframe>
+      <iframe src="فيد2.mp4" allowfullscreen></iframe>
+    </div>
+
+    <form class="review-box" onsubmit="submitReview(event)">
+      <div class="stars" role="radiogroup" aria-label="تقييم">
+        <input type="radio" id="star5" name="rating" value="5" />
+        <label for="star5" title="5 نجوم">★</label>
+        <input type="radio" id="star4" name="rating" value="4" />
+        <label for="star4" title="4 نجوم">★</label>
+        <input type="radio" id="star3" name="rating" value="3" />
+        <label for="star3" title="3 نجوم">★</label>
+        <input type="radio" id="star2" name="rating" value="2" />
+        <label for="star2" title="2 نجوم">★</label>
+        <input type="radio" id="star1" name="rating" value="1" />
+        <label for="star1" title="1 نجمة">★</label>
+      </div>
+      <textarea placeholder="شاركنا رأيك أو رسالتك هنا..." required></textarea>
+      <button type="submit">إرسال</button>
+    </form>
+
+    <a href="حجز.html" class="back-btn">رجوع</a>
+  </div>
+
+  <script>
+    function submitReview(e) {
+      e.preventDefault();
+      alert('شكراً لمشاركتك! سيتم عرض رأيك قريباً.');
+      e.target.reset();
+    }
+  </script>
+<!-- أيقونات ثابتة على الجانب الأيمن -->
+<div class="social-icons">
+  <a href="https://www.facebook.com/mhmwd.jlal.360107" target="_blank" class="icon facebook" title="Facebook"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" /></a>
+  <a href="https://wa.me/201225390059" target="_blank" class="icon whatsapp" title="WhatsApp"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" /></a>
+  <a href="https://www.youtube.com/@galelyou" target="_blank" class="icon youtube" title="YouTube"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" /></a>
+ <a href="https://mrmahmoudgalal.com" target="_blank" class="icon platform" title="Platform"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Platform" /></a>
+</div>
+
+<style>
+.social-icons {
+  position: fixed;
+  top: 50%;
+  right: 10px; /* غيّريها لـ left: 10px لو حابة تبقي على اليسار */
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+}
+
+.social-icons .icon img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgb(255, 255, 255);
+  transition: transform 0.3s ease;
+}
+
+.social-icons .icon img:hover {
+  transform: scale(1.1);
+}
+</style>
+
+</body>
+</html>
